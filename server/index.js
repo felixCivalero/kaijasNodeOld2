@@ -75,10 +75,7 @@ app.post("/uploadArtist", (req, res) => {
       } else {
         res.send("Values Inserted");
         transporter.sendMail(options, function (err, info) {
-          if (err) {
-            throw err;
-            return;
-          }
+          if (err) throw err;
         });
       }
     }
@@ -100,6 +97,8 @@ app.get("/getConcert", (req, res) => {
     (err, result) => {
       if (err) {
         throw err;
+      } else {
+        res.send(result);
       }
     }
   );
