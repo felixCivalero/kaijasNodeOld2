@@ -1,0 +1,399 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: Courier, monospace;
+  font-weight: 400;
+  line-height: 1.6rem;
+  text-rendering: optimizeLegibility;
+}
+
+.header {
+  background-color: #cde1d3;
+}
+
+.header__logo{
+  display: flex;
+  justify-content: center;
+}
+.logo{
+  height: 200px;
+  cursor: pointer;
+}
+
+.kaija__image{
+  float: right;
+  height: 400px;
+  padding-top: 100px;
+  margin-right: 20px;
+}
+
+.menu__list{
+  display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    list-style: none;
+
+}
+
+.menu__item--btn{
+  display: flex;
+    justify-content: center;
+    font-variant-caps: all-petite-caps;
+    color: #666;
+    font-size: 18px;
+    border: none;
+    font-family: Courier, monospace;
+    font-weight: 400;
+    line-height: 1.6rem;
+    text-rendering: optimizeLegibility;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 300ms ease;
+    margin-right: 10px;
+}
+.about::after{
+  content: '🕵🏽‍♀️';
+  position: absolute;
+  opacity: 0;  
+  padding-left: 10px;
+  transition: 0.1s;
+  margin-bottom: 10px;
+  font-size: 35px;
+
+}
+.stage::after{
+  content: '🎷';
+  position: absolute;
+  opacity: 0;  
+  padding-left: 10px;
+  transition: 0.1s;
+  margin-bottom: 10px;
+  font-size: 35px;
+}
+.food::after{
+  content: '👩🏽‍🍳';
+  position: absolute;
+  opacity: 0;  
+  padding-left: 10px;
+  transition: 0.1s;
+  margin-bottom: 10px;
+  font-size: 35px;
+
+}
+.contact::after{
+  content: '☎️';
+  position: absolute;
+  opacity: 0;  
+  padding-left: 10px;
+  transition: 0.1s;
+  margin-bottom: 10px;
+  font-size: 35px;
+
+}
+.menu__item--btn:hover{
+color:#cde1d3;
+
+}
+.menu__item--btn:hover:after {
+  opacity: 1;
+  transform: translateY(-170%);
+}
+
+.op__tab--active{
+  color: rgb(162, 103, 103);
+}
+
+.op__content{
+  display: none;
+}
+
+.op__content--active{
+  display: block;
+background-color: #ffffff;
+}
+
+.artist__box{
+  display: grid;
+  padding: 20px;
+}
+
+.artists__input--form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background-color: #889aa3e8;
+  padding: 2rem 4rem;
+  box-shadow: 0 4rem 6rem rgb(0 0 0 / 30%);
+  z-index: 1000;
+  transition: all 0.5s;
+
+}
+
+.artists__input--form input {
+  width: 300px;
+  height: 20px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.artists__input--form textarea {
+  width: 300px;
+  height: 200px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.artists--btn{
+  border: none;
+  font-size: 15px;
+  padding: 10px 30px 10px 30px;
+  transition: all 500ms ease;
+  margin-right: 10px;
+  background-color: #cde1d3;
+  border-radius: 3px;
+}
+.comfirm__booking--btn{
+  border: none;
+  font-size: 15px;
+  padding: 10px 30px 10px 30px;
+  transition: all 500ms ease;
+  margin-right: 10px;
+  background-color: #cde1d3;
+  border-radius: 3px;
+}
+.comfirm__booking--btn::after{
+  content: '🚀';
+  padding-left: 10px;
+
+}
+.comfirm__booking--btn:hover{
+animation: shake 0.5s;
+animation-iteration-count: infinite;
+
+}
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+.artists--btn::after {
+  content: '🎉';
+  position: absolute;
+  opacity: 0;  
+  padding-left: 10px;
+  transition: 0.5s;
+  margin-bottom: 10px;
+
+}
+.preview--btn::after{
+  content: '🤓';
+  position: absolute;
+  opacity: 0;  
+  padding-left: 10px;
+  transition: 0.5s;
+  margin-bottom: 10px;
+}
+.btn__container {
+  text-align: center;
+}
+.boka--btn::after{
+  content: '🎹';
+  position: absolute;
+  opacity: 0;  
+  padding-left: 10px;
+  transition: 0.5s;
+  margin-bottom: 10px;
+}
+.artists--btn:hover{
+  padding-left: 100px;
+  background-color: transparent;
+  cursor: pointer;
+
+}
+.artists--btn:hover:after {
+  opacity: 1;
+  padding-left: 80px;
+}
+
+.artists__container {
+  padding: 20px;
+  transition: all 800ms ease;
+  text-align: left;
+
+  }
+.artist__container h1 {
+  line-height: 2rem;
+}
+
+.artists__desc{
+  grid-column: span 2;
+  line-height: 2rem;
+}
+
+
+.close__input--btn{
+  position: absolute;
+  color: white;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.hidden {
+  display: none;
+
+}
+
+.err__msg {
+  text-align: center;
+  color: red;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.footer a {
+font-family: Courier, monospace;
+font-weight: 400;
+line-height: 1,6;
+text-rendering: optimizeLegibility;
+color: #295336;
+}
+
+.contact__kaija{
+  text-align: center;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.contact__kaija a {
+  color:#295336;
+}
+
+.about__kaija{
+  margin-left: 5%;
+  margin-right: 5%;
+  line-height: 2.3rem;
+}
+
+.about__kaija p{
+  padding-top: 10px;
+}
+
+.costumer__form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.band__form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.band__form input {
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
+
+.band__form textarea {
+  grid-column: span 2;
+  margin-bottom: 10px;
+}
+
+.costumer__form input {
+  margin-bottom: 10px;
+  width: 400px;
+}
+
+.costumer__form textarea {
+  width: 400px;
+  margin-bottom: 10px;
+}
+
+.booking__div{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background-color: #889aa3e8;
+  padding: 2rem 4rem;
+  box-shadow: 0 4rem 6rem rgb(0 0 0 / 30%);
+  z-index: 1000;
+  transition: all 0.5s;
+
+}
+
+.artists__close__box{
+  float: right;
+    color: white;
+    padding: 8px;
+    cursor: pointer;
+
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  transition: all 0.5s;
+}
+
+.band__form--div{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  background-color: #889aa3e8;
+  padding: 2rem 2rem;
+  box-shadow: 0 4rem 6rem rgb(0 0 0 / 30%);
+  z-index: 1000;
+  transition: all 0.5s;
+}
+
+.costumer__form--div{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background-color: #889aa3e8;
+  padding: 2rem 4rem;
+  box-shadow: 0 4rem 6rem rgb(0 0 0 / 30%);
+  z-index: 1000;
+  transition: all 0.5s;
+}
