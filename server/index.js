@@ -11,11 +11,11 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "localhost",
-  port: 3308,
+  host: "192.168.1.72",
   user: "root",
+  port: 3308,
   password: "",
-  database: "Kaijas",
+  database: "kaijas",
 });
 
 const transporter = nodemailer.createTransport({
