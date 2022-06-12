@@ -326,6 +326,7 @@ color: #295336;
 .band__form textarea {
   grid-column: span 2;
   margin-bottom: 10px;
+  height: 160px;
 }
 
 .costumer__form input {
@@ -336,6 +337,7 @@ color: #295336;
 .costumer__form textarea {
   width: 400px;
   margin-bottom: 10px;
+  height: 90px;
 }
 
 .booking__div{
@@ -357,6 +359,8 @@ color: #295336;
     color: white;
     padding: 8px;
     cursor: pointer;
+    background: none;
+    border: none;
 
 }
 

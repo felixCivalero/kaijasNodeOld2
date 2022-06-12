@@ -61,6 +61,21 @@ function App() {
   const artistDescInput = document.querySelector(".input__artist--desc");
   const overlay = document.querySelector(".overlay");
 
+  const bandNameInput = document.querySelector(".band__input--name");
+  const bandContactInput = document.querySelector(".band__input--contact");
+  const bandMailInput = document.querySelector(".band__input--mail");
+  const bandTelInput = document.querySelector(".band__input--tel");
+  const bandGenreInput = document.querySelector(".band__input--genre");
+  const bandLinkInput = document.querySelector(".band__input--link");
+  const bandDescInput = document.querySelector(".band__input--desc");
+
+  const costumerNameInput = document.querySelector(".costumer__input--name");
+  const costumerMailInput = document.querySelector(".costumer__input--mail");
+  const costumerTelInput = document.querySelector(".costumer__input--tel");
+  const costumerInterestInput = document.querySelector(
+    ".costumer__input--interest"
+  );
+
   /*-------------LOG IN ARTIST--------------*/
   // const getLoginInfo = () => {
   //   Axios.get("http://localhost:3001/getLoginInfo").then((response) => {
@@ -76,7 +91,7 @@ function App() {
       pin: 1234,
     };
 
-    if (pwd == account.pin && user == account.email) {
+    if (pwd === account.pin && user === account.email) {
       inputPopUp.classList.remove("hidden");
       overlay.classList.remove("hidden");
       inputLoginPin.value = "";
@@ -114,6 +129,27 @@ function App() {
     setDate("");
     setTime("");
     setDesc("");
+  };
+
+  const hideAndClearBandInput = (e) => {
+    const formDiv = document.querySelector(".band__form--div");
+    const overlay = document.querySelector(".overlay");
+    formDiv.classList.add("hidden");
+    overlay.classList.add("hidden");
+    bandContactInput.value = "";
+    bandNameInput.value = "";
+    bandMailInput.value = "";
+    bandTelInput.value = "";
+    bandGenreInput.value = "";
+    bandLinkInput.value = "";
+    bandDescInput.value = "";
+    setBandName("");
+    setBandContact("");
+    setBandMail("");
+    setBandTel("");
+    setBandGenre("");
+    setBandLink("");
+    setBandDesc("");
   };
 
   /*---------------ADDING CONCERT TO DB-----------*/
@@ -172,6 +208,21 @@ function App() {
     });
   };
 
+  const hideAndClearCostumerInput = (e) => {
+    const formDiv = document.querySelector(".costumer__form--div");
+    const overlay = document.querySelector(".overlay");
+    formDiv.classList.add("hidden");
+    overlay.classList.add("hidden");
+    costumerNameInput.value = "";
+    costumerMailInput.value = "";
+    costumerTelInput.value = "";
+    costumerInterestInput.value = "";
+    setCostumerName("");
+    setCostumerMail("");
+    setCostumerPhone("");
+    setCostumerInterest("");
+  };
+
   /*---------------MENU BAR LOGICS-----------*/
 
   const tabsToggle = (e) => {
@@ -179,7 +230,7 @@ function App() {
     const tabsContent = document.querySelectorAll(".op__content");
     const clicked = e.target.closest(".op__tab");
 
-    if (clicked.dataset.tab == 2) getConcert();
+    if (clicked.dataset.tab === "2") getConcert();
 
     if (!clicked) return;
 
@@ -196,9 +247,9 @@ function App() {
   /*---------------BOOKING-----------*/
 
   const revielBooking = (el, id) => {
-    const artistContainer = document.querySelector(
-      `.artists__container--${id}`
-    );
+    // const artistContainer = document.querySelector(
+    //   `.artists__container--${id}`
+    // );
     const bookingDiv = document.querySelector(`.booking__div--${id}`);
     const bookingInputFields = document.querySelectorAll(".booking__input");
 
@@ -375,14 +426,27 @@ function App() {
               <div className={`artists__container artists__container--${id}`}>
                 <h1>{name}</h1>
                 <p>
-                  <span role="img">🎶</span> {genre}
+                  <span aria-label="Musical Notes" role="img">
+                    🎶
+                  </span>{" "}
+                  {genre}
                 </p>
                 <p>
-                  <span role="img">🗓</span> {day}/{month}
-                  <span role="img"> ⏰</span> {time}
+                  <span aria-label="Spiral Calendar" role="img">
+                    🗓
+                  </span>{" "}
+                  {day}/{month}
+                  <span aria-label="Alarm Clock" role="img">
+                    {" "}
+                    ⏰
+                  </span>{" "}
+                  {time}
                 </p>
                 <p>
-                  <span role="img">🎟</span> {price}kr
+                  <span aria-label="Admission Ticket" role="img">
+                    🎟
+                  </span>{" "}
+                  {price}kr
                 </p>
                 <p className="artists__desc">{desc}</p>
                 <button
@@ -396,9 +460,11 @@ function App() {
               </div>
 
               <div className={`booking__div booking__div--${id} hidden`}>
-                <a className={`artists__close__box artists__box--close--${id}`}>
+                <button
+                  className={`artists__close__box artists__box--close--${id}`}
+                >
                   X
-                </a>
+                </button>
                 <h1>
                   Boka: {name}!{" "}
                   <span className="party__emojy" role="img">
@@ -561,7 +627,7 @@ function App() {
             <strong>Bordsbokning eller större sällskap</strong>
           </p>
           <p>Vid bordsbokning eller andra frågor inför ert besök.</p>
-          <a>bokabord@kaijasalong.com</a>
+          <a href="mailto:bokabord@kaijasalong.com">bokabord@kaijasalong.com</a>
           <br />
           <a href="tel:073-4233504">073-423 35 04</a>
           <div className="costumer__form--container">
@@ -576,6 +642,7 @@ function App() {
               för mer detaljer.
             </p>
             <button
+              className="artists--btn"
               onClick={(e) => {
                 e.preventDefault();
                 const formDiv = document.querySelector(".band__form--div");
@@ -595,6 +662,7 @@ function App() {
             <div className="band__form--div hidden">
               <form className="band__form">
                 <input
+                  className="band__input--name"
                   type="text"
                   name="bandName"
                   placeholder="Bandets Namn"
@@ -603,6 +671,7 @@ function App() {
                   }}
                 />
                 <input
+                  className="band__input--contact"
                   type="text"
                   name="bandContact"
                   placeholder="Kontaktperson"
@@ -612,6 +681,7 @@ function App() {
                 />
 
                 <input
+                  className="band__input--mail"
                   type="email"
                   name="bandMail"
                   placeholder="Mail"
@@ -620,6 +690,7 @@ function App() {
                   }}
                 />
                 <input
+                  className="band__input--tel"
                   type="tel"
                   name="bandNumber"
                   placeholder="Tel"
@@ -628,6 +699,7 @@ function App() {
                   }}
                 />
                 <input
+                  className="band__input--genre"
                   type="text"
                   name="bandGenre"
                   placeholder="Genre/genres"
@@ -636,6 +708,7 @@ function App() {
                   }}
                 />
                 <input
+                  className="band__input--link"
                   type="text"
                   name="bandLink-1"
                   placeholder="Länk till låt/upptr.."
@@ -644,9 +717,9 @@ function App() {
                   }}
                 />
                 <textarea
-                  className="bandDesc"
+                  className="band__input--desc"
                   name="bandDesc"
-                  placeholder="Beskriv er kort för oss..."
+                  placeholder="Beskriv er kort för oss. Max 600 bokstäver"
                   maxLength={"600"}
                   onChange={(event) => {
                     setBandDesc(event.target.value);
@@ -655,7 +728,7 @@ function App() {
 
                 <button
                   type="submit"
-                  className="band--btn"
+                  className="artists--btn"
                   name="bandButton"
                   onClick={(e) => {
                     e.preventDefault();
@@ -683,6 +756,7 @@ function App() {
                       return;
                     }
                     addBand();
+                    hideAndClearBandInput();
                   }}
                 >
                   Skicka förfrågan
@@ -700,6 +774,7 @@ function App() {
             att vara vän!
           </p>
           <button
+            className="artists--btn"
             onClick={(e) => {
               e.preventDefault();
               const formDiv = document.querySelector(".costumer__form--div");
@@ -719,6 +794,7 @@ function App() {
           <div className="costumer__form--div hidden">
             <form className="costumer__form">
               <input
+                className="costumer__input--name"
                 type="text"
                 name="costumerName"
                 placeholder="För- & efternamn.."
@@ -727,6 +803,7 @@ function App() {
                 }}
               />
               <input
+                className="costumer__input--mail"
                 type="email"
                 name="costumerMail"
                 placeholder="Mail"
@@ -735,6 +812,7 @@ function App() {
                 }}
               />
               <input
+                className="costumer__input--tel"
                 type="tel"
                 name="costumerNumber"
                 placeholder="Tel"
@@ -743,6 +821,7 @@ function App() {
                 }}
               />
               <textarea
+                className="costumer__input--interest"
                 type="text"
                 name="costumerGenre"
                 placeholder="Intresserad av"
@@ -753,6 +832,7 @@ function App() {
               <button
                 type="submit"
                 name="costumerButton"
+                className="artists--btn"
                 onClick={(e) => {
                   e.preventDefault();
                   if (
@@ -768,6 +848,7 @@ function App() {
                     return;
                   }
                   addCostumer();
+                  hideAndClearCostumerInput();
                 }}
               >
                 Bli vän!
@@ -848,25 +929,40 @@ function App() {
             <div className="artists__container">
               <h1>{name}</h1>
               <p>
-                <span role="img">🎶</span> {genre}
+                <span aria-label="Musical Notes " role="img">
+                  🎶
+                </span>{" "}
+                {genre}
               </p>
               <p>
-                <span role="img">🗓</span> {date.slice(8, 10)}/{date.slice(5, 7)}
-                <span role="img"> ⏰</span> {time}
+                <span aria-label="Spiral Calendar" role="img">
+                  🗓
+                </span>{" "}
+                {date.slice(8, 10)}/{date.slice(5, 7)}
+                <span aria-label="Alarm Clock" role="img">
+                  {" "}
+                  ⏰
+                </span>{" "}
+                {time}
               </p>
               <p>
-                <span role="img">🎟</span> {price} kr
+                <span aria-label="Admission Ticket" role="img">
+                  🎟
+                </span>{" "}
+                {price} kr
               </p>
 
               <p className="artists__desc">{desc}</p>
             </div>
           </div>
         </div>
-        <a>Storgatan 44</a>
-        <a>114 55 Stockholm</a>
-        <p>
-          © 2022 Kaijas Salong AB, <a>559335-9077</a>
-        </p>
+        <a href="https://www.google.com/maps/place/Kaijas+Musiksalong/@59.3334177,18.08639,17z/data=!3m1!4b1!4m5!3m4!1s0x465f9dee2af59155:0x21196749cc621178!8m2!3d59.333415!4d18.0906118">
+          Storgatan 44
+        </a>
+        <a href="https://www.google.com/maps/place/Kaijas+Musiksalong/@59.3334177,18.08639,17z/data=!3m1!4b1!4m5!3m4!1s0x465f9dee2af59155:0x21196749cc621178!8m2!3d59.333415!4d18.0906118">
+          114 55 Stockholm
+        </a>
+        <p>© 2022 Kaijas Salong AB, 559335-9077</p>
 
         <div className="login__container">
           <nav>
@@ -888,7 +984,7 @@ function App() {
                 placeholder="PIN.."
                 className="login__input login__input--pin"
                 onChange={(event) => {
-                  setPwd(event.target.value);
+                  setPwd(+event.target.value);
                 }}
               />
               <button
