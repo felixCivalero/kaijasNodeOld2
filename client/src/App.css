@@ -2,6 +2,10 @@ body {
   margin: 0;
   padding: 0;
 }
+a {
+    color: #295336;
+  
+}
 
 .App {
   display: flex;
@@ -20,6 +24,12 @@ body {
 .header__logo{
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  text-align: center;
+ 
+}
+.header__logo h2 {
+  color: rgb(252, 197, 59);
 }
 .logo{
   height: 200px;
@@ -400,4 +410,23 @@ color: #295336;
   box-shadow: 0 4rem 6rem rgb(0 0 0 / 30%);
   z-index: 1000;
   transition: all 0.5s;
+}
+
+.food__kaija {
+  text-align: center;
+}
+.food__kaija a {
+  color: #295336;
+}
+.closed__btn {
+  background: #cde1d3;
+  border:none;
+  padding: 5px;
+  border-radius: 5px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.closed__btn:hover {
+  transform: translateY(-40%);
 }

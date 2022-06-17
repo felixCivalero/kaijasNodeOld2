@@ -312,6 +312,104 @@ function App() {
           className="logo"
           onClick={(event) => (window.location.href = "/")}
         />
+        <h2>
+          <span aria-label="Sunflower" role="img">
+            🌻
+          </span>{" "}
+          Sommarstängt{" "}
+          <span aria-label="Sunflower" role="img">
+            🌻
+          </span>
+        </h2>
+        <h3>Välkomna åter den 3e Augusti</h3>
+        <p>
+          Håll utkik på vår{" "}
+          <a href="https://instagram.com/kaijasalong">instagram</a> eller bli{" "}
+          <button
+            className="closed__btn"
+            onClick={(e) => {
+              e.preventDefault();
+              const formDiv = document.querySelector(".costumer__form--div");
+              const overlay = document.querySelector(".overlay");
+              formDiv.classList.remove("hidden");
+              overlay.classList.remove("hidden");
+
+              overlay.addEventListener("click", function (e) {
+                e.preventDefault();
+                overlay.classList.add("hidden");
+                formDiv.classList.add("hidden");
+              });
+            }}
+          >
+            Kaijas-vän
+          </button>{" "}
+          för att vara först med våra nyheter!
+        </p>
+      </div>
+
+      <div className="costumer__form--div hidden">
+        <form className="costumer__form">
+          <input
+            className="costumer__input--name"
+            type="text"
+            name="costumerName"
+            placeholder="För- & efternamn.."
+            onChange={(event) => {
+              setCostumerName(event.target.value);
+            }}
+          />
+          <input
+            className="costumer__input--mail"
+            type="email"
+            name="costumerMail"
+            placeholder="Mail"
+            onChange={(event) => {
+              setCostumerMail(event.target.value);
+            }}
+          />
+          <input
+            className="costumer__input--tel"
+            type="tel"
+            name="costumerNumber"
+            placeholder="Tel"
+            onChange={(event) => {
+              setCostumerPhone(event.target.value);
+            }}
+          />
+          <textarea
+            className="costumer__input--interest"
+            type="text"
+            name="costumerGenre"
+            placeholder="Intresserad av"
+            onChange={(event) => {
+              setCostumerInterest(event.target.value);
+            }}
+          />
+          <button
+            type="submit"
+            name="costumerButton"
+            className="artists--btn"
+            onClick={(e) => {
+              e.preventDefault();
+              if (
+                !costumerName &&
+                !costumerMail &&
+                !costumerInterest &&
+                !costumerPhone
+              ) {
+                return;
+              }
+              if (!costumerName || !costumerMail || !costumerInterest) {
+                alert("Fyll i nog med fält så vi kan kontakta er!");
+                return;
+              }
+              addCostumer();
+              hideAndClearCostumerInput();
+            }}
+          >
+            Bli vän!
+          </button>
+        </form>
       </div>
       <div className="header">
         <nav>
@@ -607,8 +705,13 @@ function App() {
         })}
       </div>
       <div className="food__kaija op__content op__content--3">
-        <h2>Food @ Kaijas Page</h2>
-        <p>This is something!</p>
+        <h2>Vi utvecklar vår meny</h2>
+        <p>
+          Vi har stängt under sommaren och passar då på att utveckla vår meny
+          tillsammans med{" "}
+          <a href="https://instagram.com/cespedes.louis">Louis</a>. Vi är åter i
+          augusti - välkomna då.{" "}
+        </p>
       </div>
       <div className="contact__kaija op__content op__content--4">
         <div className="">
