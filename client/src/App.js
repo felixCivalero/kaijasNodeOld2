@@ -154,7 +154,7 @@ function App() {
 
   /*---------------ADDING CONCERT TO DB-----------*/
   const addArtist = () => {
-    Axios.post("http://localhost:3001/uploadArtist", {
+    Axios.post("http://localhost:3001/api/uploadArtist", {
       name: name,
       genre: genre,
       price: price,
@@ -170,7 +170,7 @@ function App() {
   /*---------------SET CONCERT FROM DB TO USESTATE-----------*/
 
   const getConcert = () => {
-    Axios.get("http://localhost:3001/getConcert").then((response) => {
+    Axios.get("http://localhost:3001/api/getConcert").then((response) => {
       setArtistsList(response.data);
     });
   };
@@ -178,7 +178,7 @@ function App() {
   /*---------------ADDING BAND-REQUEST TO DB-----------*/
 
   const addBand = () => {
-    Axios.post("http://localhost:3001/uploadBand", {
+    Axios.post("http://localhost:3001/api/uploadBand", {
       bandName: bandName,
       bandContact: bandContact,
       bandMail: bandMail,
@@ -196,7 +196,7 @@ function App() {
   /*---------------ADDING KAIJAS-FRIENDS TO DB-----------*/
 
   const addCostumer = () => {
-    Axios.post("http://localhost:3001/uploadCostumer", {
+    Axios.post("http://localhost:3001/api/uploadCostumer", {
       costumerName: costumerName,
       costumerMail: costumerMail,
       costumerPhone: costumerPhone,
@@ -280,7 +280,7 @@ function App() {
   };
 
   const book = (val) => {
-    Axios.post("http://localhost:3001/uploadBooking", {
+    Axios.post("http://localhost:3001/api/uploadBooking", {
       guestsName: bookingName,
       guestsMail: bookingMail,
       guestsTel: bookingTel,
@@ -297,7 +297,7 @@ function App() {
   };
   const updateConcert = (concertId, maxGuests) => {
     const updateCapacity = maxGuests - bookingAmount;
-    Axios.post("http://localhost:3001/updateConcert", {
+    Axios.post("http://localhost:3001/api/updateConcert", {
       id: concertId,
       capacity: updateCapacity,
     }).then(() => {
