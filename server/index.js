@@ -11,10 +11,10 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  port: 3308,
-  password: "",
+  host: "164.92.146.190",
+  user: "felix",
+  port: 3306,
+  password: "zV5u@$$3MZc",
   database: "kaijas",
 });
 
@@ -40,7 +40,7 @@ const transporter = nodemailer.createTransport({
 // });
 
 /*-----------------UPLOAD CONCERT TO SERVER-----------*/
-app.post("/uploadArtist", (req, res) => {
+app.post("/api/uploadArtist", (req, res) => {
   const name = req.body.name;
   const genre = req.body.genre;
   const price = req.body.price;
@@ -84,7 +84,7 @@ app.post("/uploadArtist", (req, res) => {
 
 /*-----------------GET CONCERT-----------*/
 
-app.get("/getConcert", (req, res) => {
+app.get("/api/getConcert", (req, res) => {
   let currDate = new Date();
   let date =
     currDate.getFullYear() +
@@ -106,7 +106,7 @@ app.get("/getConcert", (req, res) => {
 
 /*-----------------UPLOAD BAND REGUEST TO SERVER AND EMAIL artist@kaijasalong.com-----------*/
 
-app.post("/uploadBand", (req, res) => {
+app.post("/api/uploadBand", (req, res) => {
   const bandName = req.body.bandName;
   const bandContact = req.body.bandContact;
   const bandMail = req.body.bandMail;
@@ -167,7 +167,7 @@ app.post("/uploadBand", (req, res) => {
 
 /*-----------------UPLOAD vänner TO SERVER and EMAIL confimration-----------*/
 
-app.post("/uploadCostumer", (req, res) => {
+app.post("/api/uploadCostumer", (req, res) => {
   const costumerName = req.body.costumerName;
   const costumerMail = req.body.costumerMail;
   const costumerPhone = req.body.costumerPhone;
@@ -206,7 +206,7 @@ app.post("/uploadCostumer", (req, res) => {
 });
 
 /*-------------------BOOKINGS------------*/
-app.post("/uploadBooking", (req, res) => {
+app.post("/api/uploadBooking", (req, res) => {
   const bookingName = req.body.guestsName;
   const bookingMail = req.body.guestsMail;
   const bookingTel = req.body.guestsTel;
@@ -263,7 +263,7 @@ app.post("/uploadBooking", (req, res) => {
   );
 });
 
-app.post("/updateConcert", (req, res) => {
+app.post("/api/updateConcert", (req, res) => {
   const id = req.body.id;
   const availability = req.body.capacity;
 

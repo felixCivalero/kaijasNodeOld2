@@ -78,7 +78,7 @@ function App() {
 
   /*-------------LOG IN ARTIST--------------*/
   // const getLoginInfo = () => {
-  //   Axios.get("http://localhost:3001/getLoginInfo").then((response) => {
+  //   Axios.get("http://165.232.81.49:3001/getLoginInfo").then((response) => {
   //     setLogin(response.data);
   //     console.log(response.data);
   //   });
@@ -154,7 +154,7 @@ function App() {
 
   /*---------------ADDING CONCERT TO DB-----------*/
   const addArtist = () => {
-    Axios.post("http://localhost:3001/uploadArtist", {
+    Axios.post("http://localhost:3001/api/uploadArtist", {
       name: name,
       genre: genre,
       price: price,
@@ -170,7 +170,7 @@ function App() {
   /*---------------SET CONCERT FROM DB TO USESTATE-----------*/
 
   const getConcert = () => {
-    Axios.get("http://localhost:3001/getConcert").then((response) => {
+    Axios.get("http://localhost:3001/api/getConcert").then((response) => {
       setArtistsList(response.data);
     });
   };
@@ -178,7 +178,7 @@ function App() {
   /*---------------ADDING BAND-REQUEST TO DB-----------*/
 
   const addBand = () => {
-    Axios.post("http://localhost:3001/uploadBand", {
+    Axios.post("http://localhost:3001/api/uploadBand", {
       bandName: bandName,
       bandContact: bandContact,
       bandMail: bandMail,
@@ -196,7 +196,7 @@ function App() {
   /*---------------ADDING KAIJAS-FRIENDS TO DB-----------*/
 
   const addCostumer = () => {
-    Axios.post("http://localhost:3001/uploadCostumer", {
+    Axios.post("http://localhost:3001/api/uploadCostumer", {
       costumerName: costumerName,
       costumerMail: costumerMail,
       costumerPhone: costumerPhone,
@@ -279,8 +279,33 @@ function App() {
     });
   };
 
+  const fullyBooked = (el, id) => {
+    // const artistContainer = document.querySelector(
+    //   `.artists__container--${id}`
+    // );
+    const fullyBookedDiv = document.querySelector(`.fullyBooked__div--${id}`);
+
+    fullyBookedDiv.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+
+    const close = document.querySelector(`.fully_booked_box--close--${id}`);
+    const closeAndClear = () => {
+      fullyBookedDiv.classList.add("hidden");
+      overlay.classList.add("hidden");
+    };
+
+    close.addEventListener("click", function (e) {
+      e.preventDefault();
+      closeAndClear();
+    });
+    overlay.addEventListener("click", function (e) {
+      e.preventDefault();
+      closeAndClear();
+    });
+  };
+
   const book = (val) => {
-    Axios.post("http://localhost:3001/uploadBooking", {
+    Axios.post("http://localhost:3001/api/uploadBooking", {
       guestsName: bookingName,
       guestsMail: bookingMail,
       guestsTel: bookingTel,
@@ -297,7 +322,7 @@ function App() {
   };
   const updateConcert = (concertId, maxGuests) => {
     const updateCapacity = maxGuests - bookingAmount;
-    Axios.post("http://localhost:3001/updateConcert", {
+    Axios.post("http://localhost:3001/api/updateConcert", {
       id: concertId,
       capacity: updateCapacity,
     }).then(() => {
@@ -519,6 +544,7 @@ function App() {
           const desc = val.artists_desc;
           const id = val.artists_id;
           const available = val.max_guests;
+
           return (
             <div key={id} className="artists__body">
               <div className={`artists__container artists__container--${id}`}>
@@ -550,13 +576,41 @@ function App() {
                 <button
                   className={`artists--btn boka--btn btn__id--${id}`}
                   onClick={(event) => {
-                    revielBooking(event.target, id);
+                    if (available === "0") {
+                      fullyBooked(event.target, id);
+                    } else {
+                      revielBooking(event.target, id);
+                    }
                   }}
                 >
-                  Boka
+                  {available === "0" ? "Fullt" : "Boka"}
                 </button>
               </div>
-
+              <div
+                className={`fully__booked--div fullyBooked__div--${id} hidden`}
+              >
+                <button
+                  className={`artists__close__box fully_booked_box--close--${id}`}
+                >
+                  X
+                </button>
+                <h2>Konserten med {name} är fullbokad.</h2>
+                <p> Vill du skriva upp dig på väntelista?</p>
+                <p>
+                  {" "}
+                  Skicka ett mail till{" "}
+                  <a href="mailto:info@kaijasalong.com">
+                    info@kaijasalong.com
+                  </a>{" "}
+                  med namn, antal och om ni önskar äta i samband med konserten.
+                  I ämnesraden klistar du in följande "Väntelista för {name} -{" "}
+                  {day}/{month}"
+                </p>
+                <p>
+                  Vid eventuell avbokning går vi igenom väntelistan i turorning!
+                </p>
+                <p>Vi kanske hörs snart :)</p>
+              </div>
               <div className={`booking__div booking__div--${id} hidden`}>
                 <button
                   className={`artists__close__box artists__box--close--${id}`}

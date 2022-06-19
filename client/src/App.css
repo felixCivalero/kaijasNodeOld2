@@ -224,6 +224,9 @@ animation-iteration-count: infinite;
 .btn__container {
   text-align: center;
 }
+.boka--btn{
+  background-color: #cde1d3;
+}
 .boka--btn::after{
   content: '🎹';
   position: absolute;
@@ -351,6 +354,19 @@ color: #295336;
 }
 
 .booking__div{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background-color: #889aa3e8;
+  padding: 2rem 4rem;
+  box-shadow: 0 4rem 6rem rgb(0 0 0 / 30%);
+  z-index: 1000;
+  transition: all 0.5s;
+
+}
+.fully__booked--div{
   position: fixed;
   top: 50%;
   left: 50%;
