@@ -154,7 +154,7 @@ function App() {
 
   /*---------------ADDING CONCERT TO DB-----------*/
   const addArtist = () => {
-    Axios.post("http://164.92.146.190:3001/api/uploadArtist", {
+    Axios.post("http://164.92.146.190/api/uploadArtist", {
       name: name,
       genre: genre,
       price: price,
@@ -170,7 +170,7 @@ function App() {
   /*---------------SET CONCERT FROM DB TO USESTATE-----------*/
 
   const getConcert = () => {
-    Axios.get("http://164.92.146.190:3001/api/getConcert").then((response) => {
+    Axios.get("http://164.92.146.190/api/getConcert").then((response) => {
       setArtistsList(response.data);
     });
   };
@@ -178,7 +178,7 @@ function App() {
   /*---------------ADDING BAND-REQUEST TO DB-----------*/
 
   const addBand = () => {
-    Axios.post("http://164.92.146.190:3001/api/uploadBand", {
+    Axios.post("http://164.92.146.190/api/uploadBand", {
       bandName: bandName,
       bandContact: bandContact,
       bandMail: bandMail,
@@ -196,7 +196,7 @@ function App() {
   /*---------------ADDING KAIJAS-FRIENDS TO DB-----------*/
 
   const addCostumer = () => {
-    Axios.post("http://164.92.146.190:3001/api/uploadCostumer", {
+    Axios.post("http://164.92.146.190/api/uploadCostumer", {
       costumerName: costumerName,
       costumerMail: costumerMail,
       costumerPhone: costumerPhone,
@@ -305,7 +305,7 @@ function App() {
   };
 
   const book = (val) => {
-    Axios.post("http://164.92.146.190:3001/api/uploadBooking", {
+    Axios.post("http://164.92.146.190/api/uploadBooking", {
       guestsName: bookingName,
       guestsMail: bookingMail,
       guestsTel: bookingTel,
@@ -322,7 +322,7 @@ function App() {
   };
   const updateConcert = (concertId, maxGuests) => {
     const updateCapacity = maxGuests - bookingAmount;
-    Axios.post("http://164.92.146.190:3001/api/updateConcert", {
+    Axios.post("http://164.92.146.190/api/updateConcert", {
       id: concertId,
       capacity: updateCapacity,
     }).then(() => {
