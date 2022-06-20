@@ -154,7 +154,7 @@ function App() {
 
   /*---------------ADDING CONCERT TO DB-----------*/
   const addArtist = () => {
-    Axios.post("http://164.92.146.190/api/uploadArtist", {
+    Axios.post("https://www.kaijasalong.com/api/uploadArtist", {
       name: name,
       genre: genre,
       price: price,
@@ -170,7 +170,7 @@ function App() {
   /*---------------SET CONCERT FROM DB TO USESTATE-----------*/
 
   const getConcert = () => {
-    Axios.get("http://164.92.146.190/api/getConcert").then((response) => {
+    Axios.get("https://www.kaijasalong.com/api/getConcert").then((response) => {
       setArtistsList(response.data);
     });
   };
@@ -178,7 +178,7 @@ function App() {
   /*---------------ADDING BAND-REQUEST TO DB-----------*/
 
   const addBand = () => {
-    Axios.post("http://164.92.146.190/api/uploadBand", {
+    Axios.post("https://www.kaijasalong.com/api/uploadBand", {
       bandName: bandName,
       bandContact: bandContact,
       bandMail: bandMail,
@@ -196,7 +196,7 @@ function App() {
   /*---------------ADDING KAIJAS-FRIENDS TO DB-----------*/
 
   const addCostumer = () => {
-    Axios.post("http://164.92.146.190/api/uploadCostumer", {
+    Axios.post("https://www.kaijasalong.com/api/uploadCostumer", {
       costumerName: costumerName,
       costumerMail: costumerMail,
       costumerPhone: costumerPhone,
@@ -305,7 +305,7 @@ function App() {
   };
 
   const book = (val) => {
-    Axios.post("http://164.92.146.190/api/uploadBooking", {
+    Axios.post("https://www.kaijasalong.com/api/uploadBooking", {
       guestsName: bookingName,
       guestsMail: bookingMail,
       guestsTel: bookingTel,
@@ -322,7 +322,7 @@ function App() {
   };
   const updateConcert = (concertId, maxGuests) => {
     const updateCapacity = maxGuests - bookingAmount;
-    Axios.post("http://164.92.146.190/api/updateConcert", {
+    Axios.post("http://localhost:3001/api/updateConcert", {
       id: concertId,
       capacity: updateCapacity,
     }).then(() => {
@@ -543,7 +543,7 @@ function App() {
           const time = val.artists_time;
           const desc = val.artists_desc;
           const id = val.artists_id;
-          const available = val.max_guests;
+          const available = +val.max_guests;
 
           return (
             <div key={id} className="artists__body">
@@ -576,14 +576,14 @@ function App() {
                 <button
                   className={`artists--btn boka--btn btn__id--${id}`}
                   onClick={(event) => {
-                    if (available === "0") {
+                    if (available <= 0) {
                       fullyBooked(event.target, id);
                     } else {
                       revielBooking(event.target, id);
                     }
                   }}
                 >
-                  {available === "0" ? "Fullt" : "Boka"}
+                  {available <= 0 ? "Fullt" : "Boka"}
                 </button>
               </div>
               <div
@@ -630,7 +630,8 @@ function App() {
                     className={`booking__input booking__input--amount${id}`}
                     name="amount"
                     onChange={(event) => {
-                      setBookingAmount(event.target.value);
+                      setBookingAmount(+event.target.value);
+                      console.log(bookingAmount);
                     }}
                   >
                     <option value="-">-</option>
@@ -640,6 +641,8 @@ function App() {
                     <option value="4">4</option>
                     <option value="5">5</option>
                     <option value="6">6</option>
+                    <option value="6">7</option>
+                    <option value="6">8</option>
                   </select>{" "}
                 </p>
                 <p>
@@ -702,6 +705,7 @@ function App() {
                     placeholder="0707070707"
                     onChange={(event) => {
                       setBookingTel(event.target.value);
+                      console.log(bookingTel);
                     }}
                   />
                 </p>
@@ -733,7 +737,7 @@ function App() {
                       alert("Fyll i alla fält");
                       return;
                     }
-                    if (bookingAmount === "-" || bookingEat === "-") {
+                    if (isNaN(bookingAmount) === true || bookingEat === "-") {
                       alert("Var god ange giltiga alternativ");
                       return;
                     }
@@ -741,7 +745,7 @@ function App() {
                       alert("Fyll i giltigt, 10-siffrigt telefonnummer");
                       return;
                     }
-                    if (bookingAmount < available) {
+                    if (bookingAmount > available) {
                       console.log(bookingAmount, available);
                       alert("Det finns inte tillräckligt många platser kvar.");
                       return;
