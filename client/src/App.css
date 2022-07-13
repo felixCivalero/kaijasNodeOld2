@@ -44,10 +44,11 @@ a {
 }
 
 .menu__list{
+  padding: 16px 0px;
   display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    justify-items: center;
-    list-style: none;
+  grid-template-columns: 25% 25% 25% 25%;
+  justify-items: center;
+  list-style: none;
 
 }
 
@@ -56,7 +57,7 @@ a {
     justify-content: center;
     font-variant-caps: all-petite-caps;
     color: #666;
-    font-size: 18px;
+    font-size: 20px;
     border: none;
     font-family: Courier, monospace;
     font-weight: 400;
@@ -65,7 +66,6 @@ a {
     background-color: transparent;
     cursor: pointer;
     transition: all 300ms ease;
-    margin-right: 10px;
 }
 .about::after{
   content: '🕵🏽‍♀️';
@@ -320,10 +320,25 @@ color: #295336;
   padding-top: 10px;
 }
 
-.costumer__form{
+/* .costumer__form{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+} */
+
+.costumer__form {
+  display: grid;
+  grid-template-columns: 1fr;;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background-color: #889aa3e8;
+  padding: 2rem 4rem;
+  box-shadow: 0 4rem 6rem rgb(0 0 0 / 30%);
+  z-index: 1000;
+  transition: all 0.5s;
 }
 
 .band__form{
@@ -421,9 +436,7 @@ color: #295336;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70%;
-  background-color: #889aa3e8;
   padding: 2rem 4rem;
-  box-shadow: 0 4rem 6rem rgb(0 0 0 / 30%);
   z-index: 1000;
   transition: all 0.5s;
 }
@@ -445,4 +458,69 @@ color: #295336;
 
 .closed__btn:hover {
   transform: translateY(-40%);
+}
+
+@media only screen and (max-width: 600px){ 
+  .menu__item--btn {
+    font-size: 14px;
+  }
+.App {
+  min-width: 313px;
+  overflow: hidden;
+}
+
+.kaija__image {
+  height: 120px;
+}
+.about__kaija {
+ margin-left: 2%;
+ margin-right: 2%;
+}
+
+.food__kaija {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.stage__kaija {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+.contact__kaija {
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.band__form {
+  grid-template-columns: 1fr;
+}
+
+.band__form textarea {
+  grid-column: auto;
+}
+
+
+.costumer__form {
+ width: auto;
+
+}
+.artists__input--form{
+  width: auto;
+  grid-template-columns: 1fr;
+}
+
+.booking__div {
+  width:85%;
+  padding: 15px;
+
+}
+.fully__booked--div {
+  width: 85%;
+  padding: 15px;
+}
+
+.login {
+  display: grid;
+  gap: 10px;
+}
+
 }

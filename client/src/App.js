@@ -9,7 +9,8 @@ import { ReactComponent as Stage } from "./assets/Kaijas-scen-01.svg";
 
 function App() {
   ////ARTISTS LOGIN INFO
-  // const [login, setLogin] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPwd, setLoginPwd] = useState("");
 
   ///////////CONCERT UPLOAD
   const [name, setName] = useState("");
@@ -33,6 +34,13 @@ function App() {
   const [bookingEat, setBookingEat] = useState("");
   const [bookingAmount, setBookingAmount] = useState("");
 
+  ////WAITING LIST
+  const [waitingName, setWaitingName] = useState("");
+  const [waitingMail, setWaitingMail] = useState("");
+  const [waitingPhone, setWaitingPhone] = useState("");
+  const [waitingAmount, setWaitingAmount] = useState("");
+  const [waitingEat, setWaitingEat] = useState("");
+
   ////////ARTIST REQUEST
   const [bandName, setBandName] = useState("");
   const [bandContact, setBandContact] = useState("");
@@ -41,6 +49,7 @@ function App() {
   const [bandGenre, setBandGenre] = useState("");
   const [bandLink, setBandLink] = useState("");
   const [bandDesc, setBandDesc] = useState("");
+  const [bandSocial, setBandSocial] = useState("");
 
   ////////COSTUMER SIGNUP
   const [costumerName, setCostumerName] = useState("");
@@ -68,6 +77,7 @@ function App() {
   const bandGenreInput = document.querySelector(".band__input--genre");
   const bandLinkInput = document.querySelector(".band__input--link");
   const bandDescInput = document.querySelector(".band__input--desc");
+  const bandSocialInput = document.querySelector(".band__input--social");
 
   const costumerNameInput = document.querySelector(".costumer__input--name");
   const costumerMailInput = document.querySelector(".costumer__input--mail");
@@ -76,22 +86,24 @@ function App() {
     ".costumer__input--interest"
   );
 
+  const waitingNameInput = document.querySelector(".waiting__input--name");
+  const waitingAmountInput = document.querySelector(".waiting__input--amount");
+  const waitingMailInput = document.querySelector(".waiting__input--mail");
+  const waitingPhoneInput = document.querySelector(".waiting__input--phone");
+  const waitingEatInput = document.querySelector(".waiting__input--eat");
+
   /*-------------LOG IN ARTIST--------------*/
-  // const getLoginInfo = () => {
-  //   Axios.get("http://165.232.81.49:3001/getLoginInfo").then((response) => {
-  //     setLogin(response.data);
-  //     console.log(response.data);
-  //   });
-  // };
+  const getLoginInfo = () => {
+    Axios.get("http://localhost:3001/getLoginInfo").then((response) => {
+      const { email, band_PIN } = response.data[0];
+      setLoginPwd(+band_PIN);
+      setLoginEmail(email);
+    });
+  };
 
   function displayArtistInput(e) {
     e.preventDefault();
-    const account = {
-      email: "info@kaijasalong.com",
-      pin: 1234,
-    };
-
-    if (pwd === account.pin && user === account.email) {
+    if (pwd === loginPwd && user === loginEmail) {
       inputPopUp.classList.remove("hidden");
       overlay.classList.remove("hidden");
       inputLoginPin.value = "";
@@ -142,6 +154,7 @@ function App() {
     bandTelInput.value = "";
     bandGenreInput.value = "";
     bandLinkInput.value = "";
+    bandSocialInput.value = "";
     bandDescInput.value = "";
     setBandName("");
     setBandContact("");
@@ -149,12 +162,13 @@ function App() {
     setBandTel("");
     setBandGenre("");
     setBandLink("");
+    setBandSocial("");
     setBandDesc("");
   };
 
   /*---------------ADDING CONCERT TO DB-----------*/
   const addArtist = () => {
-    Axios.post("https://www.kaijasalong.com/api/uploadArtist", {
+    Axios.post("http://localhost:3001/uploadArtist", {
       name: name,
       genre: genre,
       price: price,
@@ -170,7 +184,7 @@ function App() {
   /*---------------SET CONCERT FROM DB TO USESTATE-----------*/
 
   const getConcert = () => {
-    Axios.get("https://www.kaijasalong.com/api/getConcert").then((response) => {
+    Axios.get("http://localhost:3001/getConcert").then((response) => {
       setArtistsList(response.data);
     });
   };
@@ -178,25 +192,24 @@ function App() {
   /*---------------ADDING BAND-REQUEST TO DB-----------*/
 
   const addBand = () => {
-    Axios.post("https://www.kaijasalong.com/api/uploadBand", {
+    Axios.post("http://localhost:3001/uploadBand", {
       bandName: bandName,
       bandContact: bandContact,
       bandMail: bandMail,
       bandTel: bandTel,
       bandGenre: bandGenre,
       bandLink: bandLink,
+      bandSocial: bandSocial,
       bandDesc: bandDesc,
     }).then(() => {
-      alert(
-        "Tack för all din info! Vi kikar igenom och hör av oss inom kort! :)"
-      );
+      alert("Tack! Kika er mail för mer info! :)");
     });
   };
 
   /*---------------ADDING KAIJAS-FRIENDS TO DB-----------*/
 
   const addCostumer = () => {
-    Axios.post("https://www.kaijasalong.com/api/uploadCostumer", {
+    Axios.post("http://localhost:3001/uploadCostumer", {
       costumerName: costumerName,
       costumerMail: costumerMail,
       costumerPhone: costumerPhone,
@@ -247,9 +260,6 @@ function App() {
   /*---------------BOOKING-----------*/
 
   const revielBooking = (el, id) => {
-    // const artistContainer = document.querySelector(
-    //   `.artists__container--${id}`
-    // );
     const bookingDiv = document.querySelector(`.booking__div--${id}`);
     const bookingInputFields = document.querySelectorAll(".booking__input");
 
@@ -280,9 +290,6 @@ function App() {
   };
 
   const fullyBooked = (el, id) => {
-    // const artistContainer = document.querySelector(
-    //   `.artists__container--${id}`
-    // );
     const fullyBookedDiv = document.querySelector(`.fullyBooked__div--${id}`);
 
     fullyBookedDiv.classList.remove("hidden");
@@ -305,7 +312,7 @@ function App() {
   };
 
   const book = (val) => {
-    Axios.post("https://www.kaijasalong.com/api/uploadBooking", {
+    Axios.post("http://localhost:3001/uploadBooking", {
       guestsName: bookingName,
       guestsMail: bookingMail,
       guestsTel: bookingTel,
@@ -316,17 +323,65 @@ function App() {
       bookingEventDate: val.artists_date,
       bookingEventTime: val.artists_time,
       totalPrice: val.artists_price * bookingAmount,
+    }).then(() => {});
+  };
+
+  const waitingList = (val) => {
+    const fullyBookedDiv = document.querySelector(
+      `.fullyBooked__div--${val.artists_id}`
+    );
+
+    const closeAndClear = () => {
+      fullyBookedDiv.classList.add("hidden");
+      overlay.classList.add("hidden");
+      waitingAmountInput.value = "";
+      waitingEatInput.value = "";
+      waitingNameInput.value = "";
+      waitingMailInput.value = "";
+      waitingPhoneInput.value = "";
+      setWaitingAmount("");
+      setWaitingEat("");
+      setWaitingMail("");
+      setWaitingPhone("");
+      setWaitingName("");
+    };
+    Axios.post("http://localhost:3001/uploadWaiting", {
+      waitingName: waitingName,
+      waitingMail: waitingMail,
+      waitingPhone: waitingPhone,
+      waitingAmount: waitingAmount,
+      waitingEat: waitingEat,
+      waitingEventName: val.artists_name,
+      waitingEventDate: val.artists_date,
+      waitingEventTime: val.artists_time,
+      waitingEventId: val.artists_id,
     }).then(() => {
-      alert("Du har bokat!");
+      alert("Du är uppskriven!");
+      closeAndClear();
     });
   };
+
   const updateConcert = (concertId, maxGuests) => {
+    const bookingDiv = document.querySelector(`.booking__div--${concertId}`);
+    const bookingInputFields = document.querySelectorAll(".booking__input");
+    const closeAndClear = () => {
+      bookingDiv.classList.add("hidden");
+      overlay.classList.add("hidden");
+      bookingInputFields.forEach((e) => (e.value = ""));
+
+      setBookingAmount("");
+      setBookingName("");
+      setBookingEat("");
+      setBookingMail("");
+      setBookingTel("");
+    };
     const updateCapacity = maxGuests - bookingAmount;
-    Axios.post("http://localhost:3001/api/updateConcert", {
+    Axios.post("http://localhost:3001/updateConcert", {
       id: concertId,
       capacity: updateCapacity,
     }).then(() => {
-      console.log("Successfully upodated concert table");
+      alert("Du har bokat!");
+      closeAndClear();
     });
   };
 
@@ -583,7 +638,7 @@ function App() {
                     }
                   }}
                 >
-                  {available <= 0 ? "Fullt" : "Boka"}
+                  {available <= 0 ? "Väntelista" : "Boka"}
                 </button>
               </div>
               <div
@@ -594,22 +649,123 @@ function App() {
                 >
                   X
                 </button>
-                <h2>Konserten med {name} är fullbokad.</h2>
-                <p> Vill du skriva upp dig på väntelista?</p>
+                <h1>
+                  {name} är fullbokad!{" "}
+                  <span role="img" aria-label="distaunghting-face">
+                    😫
+                  </span>
+                </h1>
+                <h2>
+                  Vill du skriva upp dig på väntelistan? Fyll i fälten nedan.
+                </h2>
                 <p>
-                  {" "}
-                  Skicka ett mail till{" "}
-                  <a href="mailto:info@kaijasalong.com">
-                    info@kaijasalong.com
-                  </a>{" "}
-                  med namn, antal och om ni önskar äta i samband med konserten.
-                  I ämnesraden klistar du in följande "Väntelista för {name} -{" "}
-                  {day}/{month}"
+                  Hur många platser vill du skriva upp? Ange här:{" "}
+                  <select
+                    className={`booking__input waiting__input--amount`}
+                    name="amount"
+                    onChange={(event) => {
+                      setWaitingAmount(+event.target.value);
+                    }}
+                  >
+                    <option value="-">-</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="6">7</option>
+                    <option value="6">8</option>
+                  </select>{" "}
                 </p>
                 <p>
-                  Vid eventuell avbokning går vi igenom väntelistan i turorning!
+                  I vilket{" "}
+                  <input
+                    className={`booking__input waiting__input--name`}
+                    type="text"
+                    name="bookingName"
+                    placeholder="För- & efternamn"
+                    width="70px"
+                    onChange={(event) => {
+                      setWaitingName(event.target.value);
+                    }}
+                  />{" "}
+                  vill {waitingAmount > 1 ? "ni" : "du"} skriva upp i?
                 </p>
-                <p>Vi kanske hörs snart :)</p>
+                <p>
+                  Vill {waitingAmount > 1 ? "ni" : "du"} äta i samband med
+                  konserten?{" "}
+                  <select
+                    className={`booking__input waiting__input--eat`}
+                    onChange={(event) => {
+                      setWaitingEat(event.target.value);
+                    }}
+                  >
+                    <option value="-">-</option>
+                    <option value="Ja">Ja</option>
+                    <option value="Nej">Nej</option>
+                  </select>
+                </p>
+                <p>
+                  Vart ska vi skicka bekräftelsen?{" "}
+                  <input
+                    className={`booking__input waiting__input--mail`}
+                    type="email"
+                    name="bookingMail"
+                    placeholder="Bokare@mail.com"
+                    onChange={(event) => {
+                      setWaitingMail(event.target.value);
+                    }}
+                  />
+                </p>
+                <p>
+                  Vilket nummer kan vi nå dig på?{" "}
+                  <input
+                    className={`booking__input waiting__input--phone`}
+                    type="text"
+                    name="bookingTel"
+                    placeholder="0707070707"
+                    onChange={(event) => {
+                      setWaitingPhone(event.target.value);
+                    }}
+                  />
+                </p>
+                <button
+                  className={`comfirm__booking--btn comfirm__waiting--btn--${id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (
+                      !waitingAmount &&
+                      !waitingName &&
+                      !waitingEat &&
+                      !waitingMail &&
+                      !waitingPhone
+                    ) {
+                      return;
+                    }
+                    if (
+                      !waitingAmount ||
+                      !waitingName ||
+                      !waitingEat ||
+                      !waitingMail ||
+                      !waitingPhone
+                    ) {
+                      alert("Fyll i alla fält");
+                      return;
+                    }
+                    if (isNaN(waitingAmount) === true || waitingEat === "-") {
+                      alert("Var god ange giltiga alternativ");
+                      return;
+                    }
+                    if (waitingPhone.length !== 10) {
+                      alert("Fyll i giltigt, 10-siffrigt telefonnummer");
+                      return;
+                    }
+                    waitingList(val);
+                  }}
+                >
+                  Skriv upp
+                </button>
               </div>
               <div className={`booking__div booking__div--${id} hidden`}>
                 <button
@@ -631,7 +787,6 @@ function App() {
                     name="amount"
                     onChange={(event) => {
                       setBookingAmount(+event.target.value);
-                      console.log(bookingAmount);
                     }}
                   >
                     <option value="-">-</option>
@@ -680,9 +835,7 @@ function App() {
                     ? ""
                     : `Vad kul ${bookingName.split(" ")[0]}, att ${
                         bookingAmount > 1 ? "ni" : "du"
-                      } vill äta! För att vi ska kunna garantera så bra service som möjligt ber vi  ${
-                        bookingAmount > 1 ? "er" : "dig"
-                      } att anlända senast 1 timme/45 min innan spelningen börjar. Vid senare ankomst kan vi inte garantera att ni får maten i samband med musiken och serverar i så fall efteråt.`}
+                      } vill äta! Kom gärna i god tid så vi hinner servera er lagom till spelningens start!`}
                 </p>
                 <p>
                   Vart ska vi skicka bekräftelsen?{" "}
@@ -705,7 +858,6 @@ function App() {
                     placeholder="0707070707"
                     onChange={(event) => {
                       setBookingTel(event.target.value);
-                      console.log(bookingTel);
                     }}
                   />
                 </p>
@@ -752,7 +904,6 @@ function App() {
                     }
                     book(val);
                     updateConcert(id, available);
-                    window.location.reload(false);
                   }}
                 >
                   Boka
@@ -875,6 +1026,15 @@ function App() {
                   placeholder="Länk till låt/upptr.."
                   onChange={(event) => {
                     setBandLink(event.target.value);
+                  }}
+                />
+                <input
+                  className="band__input--social"
+                  type="text"
+                  name="bandSocial"
+                  placeholder="Social media.."
+                  onChange={(event) => {
+                    setBandSocial(event.target.value);
                   }}
                 />
                 <textarea
@@ -1074,6 +1234,7 @@ function App() {
               <textarea
                 type="text"
                 name="desc"
+                placeholder="Ge en målande beskrivning på max 600 tecken :)"
                 className="input__artist--desc"
                 maxLength={"600"}
                 onChange={(event) => {
@@ -1135,6 +1296,7 @@ function App() {
                 name="user"
                 placeholder="Email.."
                 className="login__input login__input--user"
+                onClick={(event) => getLoginInfo()}
                 onChange={(event) => {
                   setUser(event.target.value);
                 }}
