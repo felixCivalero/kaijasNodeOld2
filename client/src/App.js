@@ -168,7 +168,7 @@ function App() {
 
   /*---------------ADDING CONCERT TO DB-----------*/
   const addArtist = () => {
-    Axios.post("http://https://www.kaijasalong.com/api/uploadArtist", {
+    Axios.post("https://www.kaijasalong.com/api/uploadArtist", {
       name: name,
       genre: genre,
       price: price,
