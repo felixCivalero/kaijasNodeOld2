@@ -94,7 +94,7 @@ function App() {
 
   /*-------------LOG IN ARTIST--------------*/
   const getLoginInfo = () => {
-    Axios.get("http://localhost:3001/getLoginInfo").then((response) => {
+    Axios.get("https://www.kaijasalong.com/api/getLoginInfo").then((response) => {
       const { email, band_PIN } = response.data[0];
       setLoginPwd(+band_PIN);
       setLoginEmail(email);
@@ -168,7 +168,7 @@ function App() {
 
   /*---------------ADDING CONCERT TO DB-----------*/
   const addArtist = () => {
-    Axios.post("http://localhost:3001/uploadArtist", {
+    Axios.post("http://https://www.kaijasalong.com/api/uploadArtist", {
       name: name,
       genre: genre,
       price: price,
@@ -184,7 +184,7 @@ function App() {
   /*---------------SET CONCERT FROM DB TO USESTATE-----------*/
 
   const getConcert = () => {
-    Axios.get("http://localhost:3001/getConcert").then((response) => {
+    Axios.get("https://www.kaijasalong.com/api/getConcert").then((response) => {
       setArtistsList(response.data);
     });
   };
@@ -192,7 +192,7 @@ function App() {
   /*---------------ADDING BAND-REQUEST TO DB-----------*/
 
   const addBand = () => {
-    Axios.post("http://localhost:3001/uploadBand", {
+    Axios.post("https://www.kaijasalong.com/api/uploadBand", {
       bandName: bandName,
       bandContact: bandContact,
       bandMail: bandMail,
@@ -209,7 +209,7 @@ function App() {
   /*---------------ADDING KAIJAS-FRIENDS TO DB-----------*/
 
   const addCostumer = () => {
-    Axios.post("http://localhost:3001/uploadCostumer", {
+    Axios.post("https://www.kaijasalong.com/api/uploadCostumer", {
       costumerName: costumerName,
       costumerMail: costumerMail,
       costumerPhone: costumerPhone,
@@ -312,7 +312,7 @@ function App() {
   };
 
   const book = (val) => {
-    Axios.post("http://localhost:3001/uploadBooking", {
+    Axios.post("https://www.kaijasalong.com/api/uploadBooking", {
       guestsName: bookingName,
       guestsMail: bookingMail,
       guestsTel: bookingTel,
@@ -345,7 +345,7 @@ function App() {
       setWaitingPhone("");
       setWaitingName("");
     };
-    Axios.post("http://localhost:3001/uploadWaiting", {
+    Axios.post("https://www.kaijasalong.com/api/uploadWaiting", {
       waitingName: waitingName,
       waitingMail: waitingMail,
       waitingPhone: waitingPhone,
@@ -376,7 +376,7 @@ function App() {
       setBookingTel("");
     };
     const updateCapacity = maxGuests - bookingAmount;
-    Axios.post("http://localhost:3001/updateConcert", {
+    Axios.post("https://www.kaijasalong.com/api/updateConcert", {
       id: concertId,
       capacity: updateCapacity,
     }).then(() => {
